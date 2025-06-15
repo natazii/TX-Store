@@ -51,14 +51,20 @@
 
             <!-- User Actions -->
             <div class="flex items-center space-x-8">
-                <a href="#" class="text-gray-300 hover:text-green-400 transition-colors duration-200 flex items-center space-x-1">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                    <span class="hidden sm:inline">تسجيل الدخول</span>
-                </a>
-                <a href="#" class="text-gray-300 hover:text-green-400 transition-colors duration-200 flex items-center space-x-1 relative">
+                <div id="userActions">
+                    <a href="login.html" id="loginLink" class="text-gray-300 hover:text-green-400 transition-colors duration-200 flex items-center space-x-1">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        <span class="hidden sm:inline">تسجيل الدخول</span>
+                    </a>
+                    <div id="userInfo" class="hidden">
+                        <span id="userName" class="text-gray-300"></span>
+                        <button onclick="logout()" class="text-gray-300 hover:text-green-400 transition-colors duration-200 mr-4">تسجيل الخروج</button>
+                    </div>
+                </div>
+                <a href="cart.html" class="text-gray-300 hover:text-green-400 transition-colors duration-200 flex items-center space-x-1 relative">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     <span class="hidden sm:inline">السلة</span>
-                    <span class="absolute -top-1 -right-1 bg-green-500 text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                    <span class="absolute -top-1 -right-1 bg-green-500 text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center cart-counter">0</span>
                 </a>
             </div>
         </div>
@@ -106,7 +112,7 @@
                             <span class="text-gray-500 line-through text-sm">$10.99</span>
                             <span class="text-green-600 font-bold text-2xl">$5.00</span>
                         </div>
-                        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">اشتري الآن</button>
+                        <button onclick="addToCart('kick-1000', 'متابعين كيك: 1000', 5.00, 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR9mVp_c8e1t1H6tVI_DifVu5yjR7yO221x2GUEVX60tfTnewq0')" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">اشتري الآن</button>
                     </div>
                 </div>
 
@@ -120,7 +126,7 @@
                             <span class="text-gray-500 line-through text-sm">$12.00</span>
                             <span class="text-green-600 font-bold text-2xl">$6.50</span>
                         </div>
-                        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">اشتري الآن</button>
+                        <button onclick="addToCart('instagram-1000', 'متابعين انستغرام: 1000', 6.50, 'https://lh4.googleusercontent.com/proxy/TIEzkrDX46iMbqGhwPdrlF1A1jy-Wa9eHj6WNX5FMaSu76MY32kzM72TdtRzsQySqVcvc_Xk_Dexyi7xWBGT8HM_4JLIlQNpRS7LpDdBHIfpAGGSxtGC2TAf76gWsjLDrIAH1e7-BImHORGwAS2SS9A1C4UzPtjdAHjBUlLxuBAd3lvbGzuz1BNf63wAcGel08EUl6pN')" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">اشتري الآن</button>
                     </div>
                 </div>
 
@@ -134,21 +140,20 @@
                             <span class="text-gray-500 line-through text-sm">$12.99</span>
                             <span class="text-green-600 font-bold text-2xl">$8.50</span>
                         </div>
-                        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">اشتري الآن</button>
+                        <button onclick="addToCart('steam-key', 'مفتاح ستيم عشوائي', 8.50, 'https://cdn.neowin.com/news/images/uploaded/2020/05/1589491195_6dbd33d4d78755e4518e3b3496ba664babea93c8.jpg')" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">اشتري الآن</button>
                     </div>
                 </div>
 
                 <!-- Deal Card 4 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
                     <img src="https://media.idownloadblog.com/wp-content/uploads/2024/08/Epic-Games-Store-Banner-1.jpg" alt="Epic Games" class="w-full h-40 object-cover">
-                    <div class="p-4">
-                        <h3 class="text-xl font-semibold text-gray-900 truncate">مفتاح Epic Games</h3>
-                        <p class="text-gray-600 text-sm mb-2">Epic Games</p>
-                        <div class="flex justify-between items-baseline mb-3">
-                            <span class="text-gray-500 line-through text-sm">$19.00</span>
-                            <span class="text-green-600 font-bold text-2xl">$9.60</span>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Epic Games Card</h3>
+                        <p class="text-gray-600 mb-4">بطاقة هدية Epic Games بقيمة 50 دولار</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-green-600 font-bold text-2xl">$50.00</span>
+                            <button onclick="addToCart('epic-50', 'Epic Games Card - $50', 50.00, 'https://cdn2.unrealengine.com/egs-epicgameslauncher-bluedarktheme-logo-1248x1278-1248x1278-3f8be6cfd3c0.png')" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">شراء الان</button>
                         </div>
-                        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">اشتري الآن</button>
                     </div>
                 </div>
             </div>
@@ -218,5 +223,87 @@
             </div>
         </div>
     </footer>
+    <script>
+        // تهيئة السلة
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        updateCartCounter();
+
+        // التحقق من حالة تسجيل الدخول
+        function checkLoginStatus() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const loginLink = document.getElementById('loginLink');
+            const userInfo = document.getElementById('userInfo');
+            const userName = document.getElementById('userName');
+
+            if (currentUser) {
+                loginLink.classList.add('hidden');
+                userInfo.classList.remove('hidden');
+                userName.textContent = `مرحباً، ${currentUser.name}`;
+            } else {
+                loginLink.classList.remove('hidden');
+                userInfo.classList.add('hidden');
+            }
+        }
+
+        // دالة تسجيل الخروج
+        function logout() {
+            localStorage.removeItem('currentUser');
+            checkLoginStatus();
+        }
+
+        // التحقق من حالة تسجيل الدخول عند تحميل الصفحة
+        checkLoginStatus();
+
+        // دالة إضافة منتج إلى السلة
+        function addToCart(productId, name, price, image) {
+            const product = {
+                id: productId,
+                name: name,
+                price: price,
+                image: image,
+                quantity: 1
+            };
+
+            // التحقق مما إذا كان المنتج موجوداً في السلة
+            const existingProduct = cart.find(item => item.id === productId);
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                cart.push(product);
+            }
+
+            // حفظ السلة في التخزين المحلي
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCounter();
+
+            // إظهار رسالة تأكيد
+            showNotification('تمت إضافة المنتج إلى السلة');
+        }
+
+        // تحديث عداد السلة
+        function updateCartCounter() {
+            const counter = document.querySelectorAll('.cart-counter');
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            counter.forEach(counter => {
+                counter.textContent = totalItems;
+            });
+        }
+
+        // إظهار إشعار
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transform transition-transform duration-300 translate-y-0';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            // إخفاء الإشعار بعد 3 ثواني
+            setTimeout(() => {
+                notification.style.transform = 'translateY(100%)';
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
