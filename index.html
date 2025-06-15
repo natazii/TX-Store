@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TX Store - Your Digital Games Marketplace</title>
+    <!-- Tailwind CSS CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font import (Inter is good for modern UIs) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for a sleek look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #28a745; /* Green */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #218838; /* Darker Green */
+        }
+        /* Style for active language button */
+        .language-active {
+            @apply ring-2 ring-green-400; /* Add a green ring around active language */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 antialiased">
+
+    <!-- Header Section -->
+    <header class="bg-gray-900 text-white shadow-md">
+        <div class="container mx-auto p-4 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center space-x-2">
+                <!-- Simple SVG Logo for "TX Store" -->
+                <svg class="h-8 w-8 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zm0 14.5V22h-2v-4.5L2 14v-2l10 5l10-5v2L12 16.5z"/>
+                </svg>
+                <!-- Removed data-key="tx_store_title" so it does not translate -->
+                <a href="#" class="text-2xl font-bold text-white hover:text-green-400 transition-colors duration-200">TX Store</a>
+            </div>
+
+            <!-- Search Bar (hidden on small screens, shown on medium and larger) -->
+            <div class="hidden md:flex flex-grow max-w-xl mx-4">
+                <input type="text" placeholder="Search for games, gift cards..." class="w-full p-2 pl-4 rounded-l-full focus:outline-none bg-gray-700 text-white placeholder-gray-400 border-none" data-key="search_placeholder">
+                <button class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-r-full flex items-center justify-center transition-colors duration-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </button>
+            </div>
+
+            <!-- User Actions (Login, Cart) and Language Selector -->
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-gray-300 hover:text-green-400 transition-colors duration-200 flex items-center space-x-1">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    <span class="hidden sm:inline" data-key="log_in">Log In</span>
+                </a>
+                <a href="#" class="text-gray-300 hover:text-green-400 transition-colors duration-200 flex items-center space-x-1 relative">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <span class="hidden sm:inline" data-key="cart">Cart</span>
+                    <span class="absolute -top-1 -right-1 bg-green-500 text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                </a>
+                <!-- Language Selector - Moved to the right of the cart -->
+                <div class="relative inline-block text-left">
+                    <div>
+                        <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-700 shadow-sm px-2 py-1 bg-gray-700 text-sm font-medium text-gray-300 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-green-500" id="language-menu-button" aria-expanded="true" aria-haspopup="true">
+                            <span id="selected-language-text">English</span>
+                            <svg class="-mr-1 ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Dropdown menu -->
+                    <div class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="language-menu-button" tabindex="-1" id="language-dropdown">
+                        <div class="py-1" role="none">
+                            <button onclick="setLanguage('en')" class="flex items-center w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white" role="menuitem" tabindex="-1" id="menu-item-0">
+                                <span class="ml-2">English</span>
+                            </button>
+                            <button onclick="setLanguage('ar')" class="flex items-center w-full px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white" role="menuitem" tabindex="-1" id="menu-item-1">
+                                <span class="ml-2">العربية</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Search Bar (shown on small screens) -->
+        <div class="md:hidden p-4">
+            <div class="flex">
+                <input type="text" placeholder="Search for games..." class="w-full p-2 pl-4 rounded-l-full focus:outline-none bg-gray-700 text-white placeholder-gray-400 border-none" data-key="search_placeholder_mobile">
+                <button class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-r-full flex items-center justify-center">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar (Categories) -->
+    <nav class="bg-gray-800 shadow-md py-3">
+        <div class="container mx-auto px-4">
+            <ul class="flex flex-wrap justify-center space-x-4 sm:space-x-6 text-sm md:text-base font-medium">
+                <li><a href="#" class="text-gray-300 hover:text-green-400 transition-colors duration-200 px-3 py-2 rounded-md" data-key="nav_services">Services</a></li>
+                <li><a href="#" class="text-gray-300 hover:text-green-400 transition-colors duration-200 px-3 py-2 rounded-md" data-key="nav_products">Products</a></li>
+                <li><a href="#" class="text-gray-300 hover:text-green-400 transition-colors duration-200 px-3 py-2 rounded-md" data-key="nav_games_codes">Games Codes</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto p-4 py-8">
+
+        <!-- Featured Deals Section -->
+        <section class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 border-b-2 border-green-500 pb-2 flex items-center" id="special-offers-heading">
+                <!-- Custom Black verification mark SVG icon from Phosphor Icons -->
+                <svg class="w-7 h-7 text-black mr-2" fill="currentColor" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" id="special-offers-icon">
+                    <path d="M200 64L104 160 56 112 40 128 104 192 216 80 200 64Z"/>
+                </svg>
+                <span class="flex-grow">Special Offers</span>
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              
+                <!-- Deal Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
+                    <!-- Image content is part of the URL and won't translate -->
+                    <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR9mVp_c8e1t1H6tVI_DifVu5yjR7yO221x2GUEVX60tfTnewq0" alt="Action Game" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <!-- Removed data-key from product titles, descriptions, and buy buttons in Hot Deals -->
+                        <h3 class="text-xl font-semibold text-gray-900 truncate">Kick Followers: 1000</h3>
+                        <p class="text-gray-600 text-sm mb-2">Kick</p>
+                        <div class="flex justify-between items-baseline mb-3">
+                            <span class="text-gray-500 line-through text-sm">$10.99</span>
+                            <span class="text-green-600 font-bold text-2xl">$5.00</span>
+                        </div>
+                        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">Buy Now</button>
+                    </div>
+                </div>
+
+        
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
+                    <!-- Image content is part of the URL and won't translate -->
+                    <img src="https://lh4.googleusercontent.com/proxy/TIEzkrDX46iMbqGhwPdrlF1A1jy-Wa9eHj6WNX5FMaSu76MY32kzM72TdtRzsQySqVcvc_Xk_Dexyi7xWBGT8HM_4JLIlQNpRS7LpDdBHIfpAGGSxtGC2TAf76gWsjLDrIAH1e7-BImHORGwAS2SS9A1C4UzPtjdAHjBUlLxuBAd3lvbGzuz1BNf63wAcGel08EUl6pN" alt="Action Game" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <!-- Removed data-key from product titles, descriptions, and buy buttons in Hot Deals -->
+                        <h3 class="text-xl font-semibold text-gray-900 truncate">Instagram Followers: 1000</h3>
+                        <p class="text-gray-600 text-sm mb-2">Instagram</p>
+                        <div class="flex justify-between items-baseline mb-3">
+                            <span class="text-gray-500 line-through text-sm">$12.00</span>
+                            <span class="text-green-600 font-bold text-2xl">$6.50</span>
+                        </div>
+                        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">Buy Now</button>
+                    </div>
+                </div>
+
+                <!-- Deal Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
+                    <!-- Image content is part of the URL and won't translate -->
+                    <img src="https://cdn.neowin.com/news/images/uploaded/2020/05/1589491195_6dbd33d4d78755e4518e3b3496ba664babea93c8.jpg" alt="Sports Sim" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <!-- Removed data-key from product titles, descriptions, and buy buttons in Hot Deals -->
+                        <h3 class="text-xl font-semibold text-gray-900 truncate">Steam Random Keey</h3>
+                        <p class="text-gray-600 text-sm mb-2">Steam</p>
+                        <div class="flex justify-between items-baseline mb-3">
+                            <span class="text-gray-500 line-through text-sm">$12.99</span>
+                            <span class="text-green-600 font-bold text-2xl">$8.50</span>
+                        </div>
+                        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">Buy Now</button>
+                    </div>
+                </div>
+
+                <!-- Deal Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
+                    <!-- Image content is part of the URL and won't translate -->
+                    <img src="https://media.idownloadblog.com/wp-content/uploads/2024/08/Epic-Games-Store-Banner-1.jpg" alt="Strategy Game" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <!-- Removed data-key from product titles, descriptions, and buy buttons in Hot Deals -->
+                        <h3 class="text-xl font-semibold text-gray-900 truncate">Epic Games Keey</h3>
+                        <p class="text-gray-600 text-sm mb-2">Epic Games</p>
+                        <div class="flex justify-between items-baseline mb-3">
+                            <span class="text-gray-500 line-through text-sm">$19.00</span>
+                            <span class="text-green-600 font-bold text-2xl">$9.60</span>
+                        </div>
+                        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Selling Games Section -->
+        <section class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 border-b-2 border-green-500 pb-2 flex items-center" id="top-selling-games-heading">
+                <!-- Black verification mark SVG icon -->
+                <svg class="w-7 h-7 text-black mr-2" fill="currentColor" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" id="top-selling-games-icon">
+                    <path d="M200 64L104 160 56 112 40 128 104 192 216 80 200 64Z"/>
+                </svg>
+                <span class="flex-grow">🎮 Top Selling Games 🎮</span>
+            </h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                <!-- Game Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
+                    <!-- Image content is part of the URL and won't translate -->
+                    <img src="https://placehold.co/300x200/555/ffffff?text=RPG+Cover" alt="Game Cover" class="w-full h-32 object-cover">
+                    <div class="p-3">
+                        <!-- Removed data-key from product titles, descriptions, and add buttons in Top Selling Games -->
+                        <h3 class="text-lg font-semibold text-gray-900 truncate">The Elder Scrolls Online</h3>
+                        <p class="text-gray-600 text-sm">Steam Key</p>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-green-600 font-bold">$14.99</span>
+                            <button class="bg-green-500 hover:bg-green-600 text-white text-sm py-1 px-3 rounded-md transition-colors duration-200">Add</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Game Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
+                    <!-- Image content is part of the URL and won't translate -->
+                    <img src="https://placehold.co/300x200/555/ffffff?text=FPS+Cover" alt="Game Cover" class="w-full h-32 object-cover">
+                    <div class="p-3">
+                        <!-- Removed data-key from product titles, descriptions, and add buttons in Top Selling Games -->
+                        <h3 class="text-lg font-semibold text-gray-900 truncate">Call of Duty: Modern Warfare</h3>
+                        <p class="text-gray-600 text-sm">Battle.net Key</p>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-green-600 font-bold">$39.99</span>
+                            <button class="bg-green-500 hover:bg-green-600 text-white text-sm py-1 px-3 rounded-md transition-colors duration-200">Add</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Game Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
+                    <!-- Image content is part of the URL and won't translate -->
+                    <img src="https://placehold.co/300x200/555/ffffff?text=Indie+Cover" alt="Game Cover" class="w-full h-32 object-cover">
+                    <div class="p-3">
+                        <!-- Removed data-key from product titles, descriptions, and add buttons in Top Selling Games -->
+                        <h3 class="text-lg font-semibold text-gray-900 truncate">Hades</h3>
+                        <p class="text-gray-600 text-sm">Epic Games Store Key</p>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-green-600 font-bold">$12.50</span>
+                            <button class="bg-green-500 hover:bg-green-600 text-white text-sm py-1 px-3 rounded-md transition-colors duration-200">Add</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Game Card 4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
+                    <!-- Image content is part of the URL and won't translate -->
+                    <img src="https://placehold.co/300x200/555/ffffff?text=Survival+Cover" alt="Game Cover" class="w-full h-32 object-cover">
+                    <div class="p-3">
+                        <!-- Removed data-key from product titles, descriptions, and add buttons in Top Selling Games -->
+                        <h3 class="text-lg font-semibold text-gray-900 truncate">Rust</h3>
+                        <p class="text-gray-600 text-sm">Steam Key</p>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-green-600 font-bold">$24.99</span>
+                            <button class="bg-green-500 hover:bg-green-600 text-white text-sm py-1 px-3 rounded-md transition-colors duration-200">Add</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Game Card 5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
+                    <!-- Image content is part of the URL and won't translate -->
+                    <img src="https://placehold.co/300x200/555/ffffff?text=Open+World+Cover" alt="Game Cover" class="w-full h-32 object-cover">
+                    <div class="p-3">
+                        <!-- Removed data-key from product titles, descriptions, and add buttons in Top Selling Games -->
+                        <h3 class="text-lg font-semibold text-gray-900 truncate">Grand Theft Auto V</h3>
+                        <p class="text-gray-600 text-sm">Rockstar Social Club Key</p>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-green-600 font-bold">$19.99</span>
+                            <button class="bg-green-500 hover:bg-green-600 text-white text-sm py-1 px-3 rounded-md transition-colors duration-200">Add</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Game Card 6 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
+                    <!-- Image content is part of the URL and won-t translate -->
+                    <img src="https://placehold.co/300x200/555/ffffff?text=MOBA+Cover" alt="Game Cover" class="w-full h-32 object-cover">
+                    <div class="p-3">
+                        <!-- Removed data-key from product titles, descriptions, and add buttons in Top Selling Games -->
+                        <h3 class="text-lg font-semibold text-gray-900 truncate">League of Legends RP</h3>
+                        <p class="text-gray-600 text-sm">Riot Points Digital Code</p>
+                        <div class="flex justify-between items-center mt-2">
+                            <span class="text-green-600 font-bold">$10.00</span>
+                            <button class="bg-green-500 hover:bg-green-600 text-white text-sm py-1 px-3 rounded-md transition-colors duration-200">Add</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more game cards as needed -->
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="bg-white rounded-lg shadow-lg p-8 text-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6" data-key="why_choose_us_heading">Why Choose TX Store?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="flex flex-col items-center">
+                    <svg class="h-12 w-12 text-green-500 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-2" data-key="instant_delivery_title">Instant Delivery</h3>
+                    <p class="text-gray-600" data-key="instant_delivery_desc">Get your game keys immediately after purchase.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <svg class="h-12 w-12 text-green-500 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.7-7 8.94V12H5V6.44l7-3.11v8.66z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-2" data-key="secure_trusted_title">Secure & Trusted</h3>
+                    <p class="text-gray-600" data-key="secure_trusted_desc">Your transactions are protected with advanced security measures.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <svg class="h-12 w-12 text-green-500 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-2" data-key="best_prices_title">Best Prices Guaranteed</h3>
+                    <p class="text-gray-600" data-key="best_prices_desc">We constantly monitor prices to give you the best deals.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-gray-300 py-8">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h4 class="font-bold text-white text-lg mb-4" data-key="footer_tx_store_heading">TX Store</h4>
+                <p class="text-sm" data-key="footer_tx_store_desc">Your trusted marketplace for digital game keys, gift cards, and more. Instant delivery, secure payments.</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-lg mb-4" data-key="footer_quick_links_heading">Quick Links</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200" data-key="footer_about_us">About Us</a></li>
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200" data-key="footer_how_it_works">How It Works</a></li>
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200" data-key="footer_contact_support">Contact Support</a></li>
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200" data-key="footer_privacy_policy">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200" data-key="footer_terms_of_service">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-lg mb-4" data-key="footer_categories_heading">Categories</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200" data-key="footer_pc_games">PC Games</a></li>
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200" data-key="footer_console_games">Console Games</a></li>
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200" data-key="footer_gift_cards">Gift Cards</a></li>
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200" data-key="footer_software">Software</li>
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200" data-key="footer_gaming_gear">Gaming Gear</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-lg mb-4" data-key="footer_follow_us_heading">Follow Us</h4>
+                <div class="flex space-x-4 text-white">
+                    <a href="#" class="hover:text-green-400 transition-colors duration-200">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.247 0-1.646.773-1.646 1.558V12h2.77l-.44 2.893h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"></path></svg>
+                    </a>
+                    <a href="#" class="hover:text-green-400 transition-colors duration-200">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22.412 6.378c.012.339.012.678.012 1.018 0 10.339-7.893 22.29-22.29 22.29V22.29C.885 22.29-.624 21.037.288 19.988c.912-1.049 2.025-1.921 3.238-2.613.003-.002.006-.004.009-.006a14.773 14.773 0 00.58-1.503c.53-1.424 1.155-2.776 1.875-4.041.722-1.265 1.53-2.457 2.427-3.57.897-1.113 1.88-2.152 2.949-3.117a.047.047 0 01.077-.042l1.654 1.353c-.042-.016-.086-.03-.13-.042-.19-.056-.37-.098-.55-.133a.038.038 0 01-.005-.002l-.004-.001-.002-.001c-.13-.024-.26-.048-.39-.071a066.066 0 01-.009-.002c-.146-.025-.29-.047-.436-.068a068.068 0 01-.01-.002c-.156-.023-.31-.044-.464-.063a068.068 0 01-.009-.001c-.162-.019-.323-.036-.484-.051a066.066 0 01-.008-.001c-.17-.015-.338-.029-.508-.04a068.068 0 01-.009-.001c-.178-.011-.355-.02-.533-.027a064.064 0 01-.01-.001c-.183-.007-.367-.013-.55-.015a065.065 0 01-.009-.001c-.187-.001-.375-.001-.562 0a065.065 0 01-.008.001c-.187.001-.373.001-.56.002a065.065 0 01-.009.001c-.184.002-.367.004-.55.006a065.065 0 01-.009.001c-.18.003-.36.007-.539.01a065.065 0 01-.009.001c-.178.004-.356.008-.533.013a064.064 0 01-.01.002c-.175.006-.349.012-.523.019a064.064 0 01-.009.002c-.168.008-.336.017-.503.027a065.065 0 01-.009.002c-.158.01-.315.02-.47.031a066.066 0 01-.009.002c-.146.012-.29.025-.432.04a066.066 0 01-.009.002c-.131.016-.26.033-.389.052a066.066 0 01-.009.002c-.114.02-.228.041-.339.064a066.066 0 01-.009.002c-.097.023-.193.047-.287.073a066.066 0 01-.009.002c-.083.025-.164.05-.244.077a066.066 0 01-.009.002c-.069.028-.137.056-.204.086a067.067 0 01-.009.002c-.053.029-.106.059-.158.089a067.067 0 01-.009.002c-.039.029-.078.059-.116.09a067.067 0 01-.009.002c-.026.029-.052.059-.077.089a068.068 0 01-.009.002c-.015.029-.03.059-.044.088a068.068 0 01-.009.002c-.007.029-.013.059-.019.088a068.068 0 01-.009.002c-.002.029-.004.058-.005.088a069.069 0 01-.009.002c-.001.029-.001.058 0 .088a069.069 0 01.008.002c.001.029.003.058.006.088a069.069 0 01.009.002c.009.029.019.058.029.088a069.069 0 01.009.002c.026.029.053.059.08.088a07.07 0 01.009.002c.057.029.115.059.172.088a07.07 0 01.009.002c.1.029.201.059.301.088a07.07 0 01.009.002c.13.029.258.059.387.088a07.07 0 01.009.002c.205.029.41.059.615.088a07.07 0 01.009.002c.28.029.56.059.84.088a07.07 0 01.009.002c.414.029.828.059 1.242.088a07.07 0 01.009.002c.62.029 1.24.059 1.86.088a07.07 0 01-.009-.002c-.001.029-.001.058-.001.088a07.07 0 01-.009.002c-.002.029-.004.058-.006.088a07.07 0 01-.009.002c-.009.029-.019.058-.029.088a07.07 0 01-.009.002c-.026.029-.053.059-.08.088a07.07 0 01-.009.002c-.057.029-.115.059-.172.088a07.07 0 01-.009.002c-.1.029-.201.059-.301.088a07.07 0 01-.009.002c-.13.029-.258.059-.387.088a07.07 0 01-.009.002c-.205.029-.41.059-.615.088a07.07 0 01-.009.002c-.28.029-.56.059-.84.088a07.07 0 01-.009.002c-.414.029-.828.059-1.242.088a07.07 0 01-.009.002c-.62.029-1.24.059-1.86.088a07.07 0 01-.009.002z" clip-rule="evenodd"></path></svg>
+                    </a>
+                    <a href="#" class="hover:text-green-400 transition-colors duration-200">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 5.01 3.693 9.176 8.432 9.876V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.247 0-1.646.773-1.646 1.558V12h2.77l-.44 2.893h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-4 mt-8 text-center text-sm border-t border-gray-700 pt-4">
+            <p data-key="copyright_text">&copy; 2025 TX Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Language translation object
+        const translations = {
+            en: {
+                // tx_store_title: 'TX Store', // This key is removed as per user request
+                search_placeholder: 'Search for games, gift cards...',
+                search_placeholder_mobile: 'Search for games...',
+                log_in: 'Log In',
+                cart: 'Cart',
+                nav_services: 'Services',
+                nav_products: 'Products',
+                nav_games_codes: 'Games Codes',
+                // special_offers_heading: 'Special Offers', // Removed to stop translation
+                // The following product titles, descriptions, and buttons are now hardcoded in HTML (no data-key)
+                // cyberpunk_title: 'Cyberpunk Odyssey 2077',
+                // pc_digital_key: 'PC Digital Key',
+                // buy_now_button: 'Buy Now', // This key is removed as per user request
+                // dragon_legacy_title: 'Dragon\'s Legacy: Reborn',
+                // steam_key: 'Steam Key',
+                // football_manager_title: 'Football Manager 2025',
+                // epic_games_key: 'Epic Games Store Key',
+                // galactic_conquest_title: 'Galactic Conquest IV',
+                // gog_key: 'GOG.com Key',
+                // top_selling_games_heading: 'Top Selling Games', // Removed to stop translation
+                // The following product titles, descriptions, and buttons are now hardcoded in HTML (no data-key)
+                // elder_scrolls_title: 'The Elder Scrolls Online',
+                // battlenet_key: 'Battle.net Key',
+                // hades_title: 'Hades',
+                // rust_title: 'Rust',
+                // gta_v_title: 'Grand Theft Auto V',
+                // rockstar_key: 'Rockstar Social Club Key',
+                // lol_rp_title: 'League of Legends RP',
+                // riot_points_code: 'Riot Points Digital Code',
+                // add_button: 'Add', // This key is removed as per user request
+                why_choose_us_heading: 'Why Choose TX Store?',
+                instant_delivery_title: 'Instant Delivery',
+                instant_delivery_desc: 'Get your game keys immediately after purchase.',
+                secure_trusted_title: 'Secure & Trusted',
+                secure_trusted_desc: 'Your transactions are protected with advanced security measures.',
+                best_prices_title: 'Best Prices Guaranteed',
+                best_prices_desc: 'We constantly monitor prices to give you the best deals.',
+                footer_tx_store_heading: 'TX Store',
+                footer_tx_store_desc: 'Your trusted marketplace for digital game keys, gift cards, and more. Instant delivery, secure payments.',
+                footer_quick_links_heading: 'Quick Links',
+                footer_about_us: 'About Us',
+                footer_how_it_works: 'How It Works',
+                footer_contact_support: 'Contact Support',
+                footer_privacy_policy: 'Privacy Policy',
+                footer_terms_of_service: 'Terms of Service',
+                footer_categories_heading: 'Categories',
+                footer_pc_games: 'PC Games',
+                footer_console_games: 'Console Games',
+                footer_gift_cards: 'Gift Cards',
+                footer_software: 'Software',
+                footer_gaming_gear: 'Gaming Gear',
+                footer_follow_us_heading: 'Follow Us',
+                copyright_text: '&copy; 2025 TX Store. All rights reserved.'
+            },
+            ar: {
+                // tx_store_title: 'متجر TX', // This key is removed as per user request
+                search_placeholder: 'البحث عن الألعاب، بطاقات الهدايا...',
+                search_placeholder_mobile: 'البحث عن الألعاب...',
+                log_in: 'تسجيل الدخول',
+                cart: 'السلة',
+                nav_services: 'الخدمات',
+                nav_products: 'المنتجات',
+                nav_games_codes: 'أكواد الألعاب',
+                // special_offers_heading: 'العروض الخاصة', // Removed to stop translation
+                // The following product titles, descriptions, and buttons are now hardcoded in HTML (no data-key)
+                // cyberpunk_title: 'سايبر بانك أوديسي 2077',
+                // pc_digital_key: 'مفتاح رقمي للكمبيوتر',
+                // buy_now_button: 'اشترِ الآن', // This key is removed as per user request
+                // dragon_legacy_title: 'تراث التنين: الولادة الجديدة',
+                // steam_key: 'مفتاح ستيم',
+                // football_manager_title: 'مدير كرة القدم 2025',
+                // epic_games_key: 'مفتاح متجر Epic Games',
+                // galactic_conquest_title: 'الغزو المجري الرابع',
+                // gog_key: 'مفتاح GOG.com',
+                top_selling_games_heading: 'الألعاب الأكثر مبيعًا', // Changed to Arabic plain text
+                // The following product titles, descriptions, and buttons are now hardcoded in HTML (no data-key)
+                // elder_scrolls_title: 'ذا إلدر سكرولز أونلاين',
+                // battlenet_key: 'مفتاح Battle.net',
+                // hades_title: 'هاديس',
+                // rust_title: 'رست',
+                // gta_v_title: 'جراند ثفت أوتو V',
+                // rockstar_key: 'مفتاح روكستار سوشيال كلوب',
+                // lol_rp_title: 'نقاط LOL RP',
+                // riot_points_code: 'رمز رقمي لنقاط Riot',
+                // add_button: 'أضف', // This key is removed as per user request
+                why_choose_us_heading: 'لماذا تختار متجر TX؟',
+                instant_delivery_title: 'تسليم فوري',
+                instant_delivery_desc: 'احصل على مفاتيح ألعابك فور الشراء.',
+                secure_trusted_title: 'آمن وموثوق',
+                secure_trusted_desc: 'معاملاتك محمية بإجراءات أمان متقدمة.',
+                best_prices_title: 'أفضل الأسعار مضمونة',
+                best_prices_desc: 'نحن نراقب الأسعار باستمرار لنقدم لك أفضل الصفقات.',
+                footer_tx_store_heading: 'متجر TX',
+                footer_tx_store_desc: 'سوقك الموثوق لمفاتيح الألعاب الرقمية وبطاقات الهدايا والمزيد. تسليم فوري، مدفوعات آمنة.',
+                footer_quick_links_heading: 'روابط سريعة',
+                footer_about_us: 'عنا',
+                footer_how_it_works: 'كيف يعمل',
+                footer_contact_support: 'اتصل بالدعم',
+                footer_privacy_policy: 'سياسة الخصوصية',
+                footer_terms_of_service: 'شروط الخدمة',
+                footer_categories_heading: 'الفئات',
+                footer_pc_games: 'ألعاب الكمبيوتر',
+                footer_console_games: 'ألعاب الكونسول',
+                footer_gift_cards: 'بطاقات الهدايا',
+                footer_software: 'البرامج',
+                footer_gaming_gear: 'معدات الألعاب',
+                footer_follow_us_heading: 'تابعنا',
+                copyright_text: '&copy; 2025 متجر TX. جميع الحقوق محفوظة.'
+            }
+        };
+
+        let currentLang = 'en'; // Default language
+
+        // Function to update content based on language
+        function updateContent() {
+            // Update title
+            document.title = translations[currentLang].tx_store_title + ' - ' + (currentLang === 'en' ? 'Your Digital Games Marketplace' : 'سوقك الرقمي للألعاب');
+
+            // Update elements with data-key attribute
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[currentLang][key] !== undefined) {
+                    element.textContent = translations[currentLang][key];
+                }
+            });
+
+            // Update specific placeholder texts for search inputs
+            const searchInputs = document.querySelectorAll('input[placeholder]');
+            searchInputs.forEach(input => {
+                if (input.getAttribute('data-key') === 'search_placeholder') {
+                    input.placeholder = translations[currentLang]['search_placeholder'];
+                } else if (input.getAttribute('data-key') === 'search_placeholder_mobile') {
+                    input.placeholder = translations[currentLang]['search_placeholder_mobile'];
+                }
+            });
+
+            // Update selected language text
+            document.getElementById('selected-language-text').textContent = (currentLang === 'ar') ? 'العربية' : 'English';
+
+            // Adjust alignment and icon margin for headings based on language direction
+            const headingsToAdjust = [
+                { id: 'special-offers-heading', iconId: 'special-offers-icon' },
+                { id: 'top-selling-games-heading', iconId: 'top-selling-games-icon' }
+            ];
+
+            headingsToAdjust.forEach(item => {
+                const heading = document.getElementById(item.id);
+                const icon = document.getElementById(item.iconId);
+                const textSpan = heading.querySelector('span.flex-grow'); // Target the span holding the text
+
+                if (heading && icon && textSpan) {
+                    // Remove dir attribute set in previous steps to prevent full heading mirroring
+                    heading.removeAttribute('dir');
+
+                    // Reset flex alignment classes (always justify-start for consistent left alignment)
+                    heading.classList.remove('justify-start', 'justify-end');
+                    heading.classList.add('justify-start'); // Always align to left
+
+                    // Adjust margin classes for the icon (always mr-2 for icon to left of text)
+                    icon.classList.remove('mr-2', 'ml-2');
+                    icon.classList.add('mr-2'); // Always margin right for icon
+
+                    // Ensure icon is always before the text for LTR visual order
+                    if (heading.firstChild !== icon) { // Only reorder if not already in correct order
+                        heading.insertBefore(icon, textSpan);
+                    }
+                }
+            });
+        }
+
+        // Function to set the language and update content
+        function setLanguage(langCode) {
+            currentLang = langCode;
+            localStorage.setItem('preferredLang', langCode); // Save preference
+            updateContent();
+            toggleLanguageDropdown(); // Close dropdown after selection
+        }
+
+        // Toggle language dropdown visibility
+        function toggleLanguageDropdown() {
+            const dropdown = document.getElementById('language-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Event listener to toggle dropdown
+        document.getElementById('language-menu-button').addEventListener('click', toggleLanguageDropdown);
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(event) {
+            const langMenuButton = document.getElementById('language-menu-button');
+            const langDropdown = document.getElementById('language-dropdown');
+            if (!langMenuButton.contains(event.target) && !langDropdown.contains(event.target)) {
+                langDropdown.classList.add('hidden');
+            }
+        });
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLang');
+            if (savedLang) {
+                currentLang = savedLang;
+            }
+            updateContent();
+        });
+    </script>
+</body>
+</html>
