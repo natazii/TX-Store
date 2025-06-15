@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TX Store - متجر الألعاب الرقمي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font import (Cairo is excellent for Arabic text) */
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap');
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+        /* Custom scrollbar for a sleek look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #28a745;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 antialiased">
+    <!-- Header Section -->
+    <header class="bg-gray-900 text-white shadow-md">
+        <div class="container mx-auto p-4 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center space-x-2">
+                <svg class="h-8 w-8 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zm0 14.5V22h-2v-4.5L2 14v-2l10 5l10-5v2L12 16.5z"/>
+                </svg>
+                <a href="#" class="text-2xl font-bold text-white hover:text-green-400 transition-colors duration-200">TX Store</a>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="hidden md:flex flex-grow max-w-xl mx-4">
+                <div class="relative w-full">
+                    <input type="text" placeholder="ابحث عن ألعاب، بطاقات هدايا..." class="w-full p-2 pr-12 rounded-full focus:outline-none bg-gray-700 text-white placeholder-gray-400 border-none">
+                    <button class="absolute left-3 top-1/2 transform -translate-y-1/2 bg-transparent text-white p-1" title="بحث">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- User Actions -->
+            <div class="flex items-center space-x-8">
+                <a href="#" class="text-gray-300 hover:text-green-400 transition-colors duration-200 flex items-center space-x-1">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    <span class="hidden sm:inline">تسجيل الدخول</span>
+                </a>
+                <a href="#" class="text-gray-300 hover:text-green-400 transition-colors duration-200 flex items-center space-x-1 relative">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <span class="hidden sm:inline">السلة</span>
+                    <span class="absolute -top-1 -right-1 bg-green-500 text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Mobile Search Bar -->
+        <div class="md:hidden p-4">
+            <div class="relative">
+                <input type="text" placeholder="ابحث عن ألعاب..." class="w-full p-2 pr-12 rounded-full focus:outline-none bg-gray-700 text-white placeholder-gray-400 border-none">
+                <button class="absolute left-3 top-1/2 transform -translate-y-1/2 bg-transparent text-white p-1" title="بحث">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-800 shadow-md py-3">
+        <div class="container mx-auto px-4">
+            <ul class="flex flex-wrap justify-center space-x-4 sm:space-x-6 text-sm md:text-base font-medium">
+                <li><a href="services.html" class="text-gray-300 hover:text-green-400 transition-colors duration-200 px-3 py-2 rounded-md">الخدمات</a></li>
+                <li><a href="products.html" class="text-gray-300 hover:text-green-400 transition-colors duration-200 px-3 py-2 rounded-md">المنتجات</a></li>
+                <li><a href="game-codes.html" class="text-gray-300 hover:text-green-400 transition-colors duration-200 px-3 py-2 rounded-md">أكواد الألعاب</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto p-4 py-8">
+        <!-- Featured Deals Section -->
+        <section class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 border-b-2 border-green-500 pb-2 flex items-center">
+                <svg class="w-7 h-7 text-black mr-2" fill="currentColor" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M200 64L104 160 56 112 40 128 104 192 216 80 200 64Z"/>
+                </svg>
+                <span class="flex-grow">العروض الخاصة</span>
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Deal Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
+                    <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR9mVp_c8e1t1H6tVI_DifVu5yjR7yO221x2GUEVX60tfTnewq0" alt="Kick Followers" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold text-gray-900 truncate">متابعين كيك: 1000</h3>
+                        <p class="text-gray-600 text-sm mb-2">كيك</p>
+                        <div class="flex justify-between items-baseline mb-3">
+                            <span class="text-gray-500 line-through text-sm">$10.99</span>
+                            <span class="text-green-600 font-bold text-2xl">$5.00</span>
+                        </div>
+                        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">اشتري الآن</button>
+                    </div>
+                </div>
+
+                <!-- Deal Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
+                    <img src="https://lh4.googleusercontent.com/proxy/TIEzkrDX46iMbqGhwPdrlF1A1jy-Wa9eHj6WNX5FMaSu76MY32kzM72TdtRzsQySqVcvc_Xk_Dexyi7xWBGT8HM_4JLIlQNpRS7LpDdBHIfpAGGSxtGC2TAf76gWsjLDrIAH1e7-BImHORGwAS2SS9A1C4UzPtjdAHjBUlLxuBAd3lvbGzuz1BNf63wAcGel08EUl6pN" alt="Instagram Followers" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold text-gray-900 truncate">متابعين انستغرام: 1000</h3>
+                        <p class="text-gray-600 text-sm mb-2">انستغرام</p>
+                        <div class="flex justify-between items-baseline mb-3">
+                            <span class="text-gray-500 line-through text-sm">$12.00</span>
+                            <span class="text-green-600 font-bold text-2xl">$6.50</span>
+                        </div>
+                        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">اشتري الآن</button>
+                    </div>
+                </div>
+
+                <!-- Deal Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
+                    <img src="https://cdn.neowin.com/news/images/uploaded/2020/05/1589491195_6dbd33d4d78755e4518e3b3496ba664babea93c8.jpg" alt="Steam Key" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold text-gray-900 truncate">مفتاح ستيم عشوائي</h3>
+                        <p class="text-gray-600 text-sm mb-2">ستيم</p>
+                        <div class="flex justify-between items-baseline mb-3">
+                            <span class="text-gray-500 line-through text-sm">$12.99</span>
+                            <span class="text-green-600 font-bold text-2xl">$8.50</span>
+                        </div>
+                        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">اشتري الآن</button>
+                    </div>
+                </div>
+
+                <!-- Deal Card 4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
+                    <img src="https://media.idownloadblog.com/wp-content/uploads/2024/08/Epic-Games-Store-Banner-1.jpg" alt="Epic Games" class="w-full h-40 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold text-gray-900 truncate">مفتاح Epic Games</h3>
+                        <p class="text-gray-600 text-sm mb-2">Epic Games</p>
+                        <div class="flex justify-between items-baseline mb-3">
+                            <span class="text-gray-500 line-through text-sm">$19.00</span>
+                            <span class="text-green-600 font-bold text-2xl">$9.60</span>
+                        </div>
+                        <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">اشتري الآن</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="bg-white rounded-lg shadow-lg p-8 text-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">لماذا تختار TX Store؟</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="flex flex-col items-center">
+                    <svg class="h-12 w-12 text-green-500 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-2">توصيل فوري</h3>
+                    <p class="text-gray-600">احصل على مفاتيح الألعاب فور الشراء</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <svg class="h-12 w-12 text-green-500 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.7-7 8.94V12H5V6.44l7-3.11v8.66z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-2">آمن وموثوق</h3>
+                    <p class="text-gray-600">معاملاتك محمية بإجراءات أمنية متقدمة</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <svg class="h-12 w-12 text-green-500 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    </svg>
+                    <h3 class="text-xl font-semibold mb-2">أفضل الأسعار مضمونة</h3>
+                    <p class="text-gray-600">نراقب الأسعار باستمرار لنقدم لك أفضل العروض</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-gray-300 py-8">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h4 class="font-bold text-white text-lg mb-4">TX Store</h4>
+                <p class="text-sm">سوقك الموثوق لمفاتيح الألعاب الرقمية وبطاقات الهدايا والمزيد. توصيل فوري، مدفوعات آمنة.</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-lg mb-4">روابط سريعة</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200">من نحن</a></li>
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200">كيف يعمل</a></li>
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200">اتصل بالدعم</a></li>
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200">سياسة الخصوصية</a></li>
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200">شروط الخدمة</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-lg mb-4">التصنيفات</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200">ألعاب الكمبيوتر</a></li>
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200">ألعاب الكونسول</a></li>
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200">بطاقات الهدايا</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-lg mb-4">تواصل معنا</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200">البريد الإلكتروني</a></li>
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200">واتساب</a></li>
+                    <li><a href="#" class="hover:text-green-400 transition-colors duration-200">تويتر</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

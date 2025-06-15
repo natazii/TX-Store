@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TX Store - الخدمات</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #28a745;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #218838;
+        }
+        .language-active {
+            @apply ring-2 ring-green-400;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 antialiased">
+    <!-- Header Section -->
+    <header class="bg-gray-900 text-white shadow-md">
+        <div class="container mx-auto p-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg class="h-8 w-8 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zm0 14.5V22h-2v-4.5L2 14v-2l10 5l10-5v2L12 16.5z"/>
+                </svg>
+                <a href="desine.html" class="text-2xl font-bold text-white hover:text-green-400 transition-colors duration-200">TX Store</a>
+            </div>
+
+            <!-- User Actions -->
+            <div class="flex items-center space-x-8">
+                <a href="#" class="text-gray-300 hover:text-green-400 transition-colors duration-200 flex items-center space-x-1">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    <span class="hidden sm:inline">تسجيل الدخول</span>
+                </a>
+                <a href="#" class="text-gray-300 hover:text-green-400 transition-colors duration-200 flex items-center space-x-1 relative">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <span class="hidden sm:inline">السلة</span>
+                    <span class="absolute -top-1 -right-1 bg-green-500 text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-800 shadow-md py-3">
+        <div class="container mx-auto px-4">
+            <ul class="flex flex-wrap justify-center space-x-4 sm:space-x-6 text-sm md:text-base font-medium">
+                <li><a href="services.html" class="text-green-400 px-3 py-2 rounded-md">الخدمات</a></li>
+                <li><a href="products.html" class="text-gray-300 hover:text-green-400 transition-colors duration-200 px-3 py-2 rounded-md">المنتجات</a></li>
+                <li><a href="game-codes.html" class="text-gray-300 hover:text-green-400 transition-colors duration-200 px-3 py-2 rounded-md">أكواد الألعاب</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 py-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">الخدمات المتوفرة</h1>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Kick Followers Card -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
+                <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR9mVp_c8e1t1H6tVI_DifVu5yjR7yO221x2GUEVX60tfTnewq0" alt="Kick Followers Image" class="w-full h-40 object-cover p-4">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-900 truncate">Kick Followers: 1000</h3>
+                    <p class="text-gray-600 text-sm mb-2">Kick</p>
+                    <div class="flex justify-between items-baseline mb-3">
+                        <span class="text-gray-500 line-through text-sm">$10.99</span>
+                        <span class="text-green-600 font-bold text-2xl">$5.00</span>
+                    </div>
+                    <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">شراء الان</button>
+                </div>
+            </div>
+
+            <!-- Instagram Followers Card -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
+                <img src="https://lh4.googleusercontent.com/proxy/TIEzkrDX46iMbqGhwPdrlF1A1jy-Wa9eHj6WNX5FMaSu76MY32kzM72TdtRzsQySqVcvc_Xk_Dexyi7xWBGT8HM_4JLIlQNpRS7LpDdBHIfpAGGSxtGC2TAf76gWsjLDrIAH1e7-BImHORGwAS2SS9A1C4UzPtjdAHjBUlLxuBAd3lvbGzuz1BNf63wAcGel08EUl6pN" alt="Instagram Followers Image" class="w-full h-40 object-cover p-4">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-900 truncate">Instagram Followers: 1000</h3>
+                    <p class="text-gray-600 text-sm mb-2">Instagram</p>
+                    <div class="flex justify-between items-baseline mb-3">
+                        <span class="text-gray-500 line-through text-sm">$12.00</span>
+                        <span class="text-green-600 font-bold text-2xl">$6.50</span>
+                    </div>
+                    <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">شراء الان</button>
+                </div>
+            </div>
+
+            <!-- New Product Card 1 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
+                <img src="https://www.tulsamarketingonline.com/wp-content/uploads/2022/06/TikTok-Banner.png" alt="Facebook Likes Image" class="w-full h-40 object-cover p-4">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-900 truncate">TiKtok Followers: 500</h3>
+                    <p class="text-gray-600 text-sm mb-2">TikTok</p>
+                    <div class="flex justify-between items-baseline mb-3">
+                        <span class="text-gray-500 line-through text-sm">$8.99</span>
+                        <span class="text-green-600 font-bold text-2xl">$4.50</span>
+                    </div>
+                    <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">شراء الان</button>
+                </div>
+            </div>
+
+            <!-- New Product Card 2 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105 duration-200">
+                <img src="https://e0.pxfuel.com/wallpapers/698/33/desktop-wallpaper-youtube-logo-grunge-black-background-youtube-logo-for-with-resolution-high-quality-youtu-in-2020-youtube-logo-youtube-banner-background-youtube-banners.jpg" alt="YouTube Views Image" class="w-full h-40 object-cover p-4">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold text-gray-900 truncate">YouTube Views: 1000</h3>
+                    <p class="text-gray-600 text-sm mb-2">YouTube</p>
+                    <div class="flex justify-between items-baseline mb-3">
+                        <span class="text-gray-500 line-through text-sm">$15.00</span>
+                        <span class="text-green-600 font-bold text-2xl">$7.50</span>
+                    </div>
+                    <button class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition-colors duration-200">شراء الان</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-8 mt-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2024 TX Store. جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+</body>
+</html>
