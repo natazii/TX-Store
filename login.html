@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - TX Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap');
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-lg">
+            <div>
+                <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                    تسجيل الدخول
+                </h2>
+                <p class="mt-2 text-center text-sm text-gray-600">
+                    اختر طريقة تسجيل الدخول المفضلة لديك
+                </p>
+            </div>
+            <div class="mt-8 space-y-4">
+                <!-- Google Login using Google Identity Services (One Tap/Automatic) -->
+                <div id="google_signin_container" class="flex justify-center">
+                    <div id="g_id_onload"
+                         data-client_id="599427220701-jroh1p9l15bq56u3av03g938k2ajibib.apps.googleusercontent.com"
+                         data-context="signin"
+                         data-ux_mode="popup"
+                         data-callback="handleCredentialResponse"
+                         data-itp_support="true">
+                    </div>
+
+                    <div class="g_id_signin"
+                         data-type="standard"
+                         data-shape="rectangular"
+                         data-theme="filled_black"
+                         data-text="continue_with"
+                         data-size="large"
+                         data-logo_alignment="left">
+                    </div>
+                </div>
+
+                <!-- Discord Login Button -->
+                <div class="flex justify-center">
+                    <button onclick="loginWithDiscord()" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#5865F2] hover:bg-[#4752C4] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5865F2] transition-colors duration-200">
+                        <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                        </svg>
+                        تسجيل الدخول باستخدام Discord
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Identity Services Library -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+    <script>
+        // Google Sign-In Initialization and Callback Function
+        window.onload = function () {
+            google.accounts.id.initialize({
+                client_id: '599427220701-jroh1p9l15bq56u3av03g938k2ajibib.apps.googleusercontent.com', // تم تحديثه الآن إلى معرف العميل الصحيح
+                callback: handleCredentialResponse,
+                // parent: 'google_signin_container' // إذا كنت تريد وضع الزر في عنصر معين
+            });
+            // google.accounts.id.prompt(); // لإظهار One Tap prompt تلقائيًا عند تحميل الصفحة
+            google.accounts.id.renderButton(
+                document.getElementById("google_signin_container"),
+                {
+                    type: "standard", // أو "icon"
+                    size: "large",
+                    text: "continue_with", // أو "signin_with"
+                    shape: "rectangular",
+                    theme: "filled_black",
+                    logo_alignment: "left"
+                }  // customization attributes
+            );
+        };
+
+        function handleCredentialResponse(response) {
+            console.log("ID Token: " + response.credential);
+            // هنا، يمكنك إرسال response.credential (وهو ID Token) إلى خادمك للتحقق والمصادقة.
+            // في هذا المثال، سنقوم بمحاكاة تسجيل الدخول وتخزين بيانات المستخدم.
+
+            // فك تشفير الـ ID Token للحصول على بيانات المستخدم (للتوضيح فقط في الواجهة الأمامية)
+            // في بيئة إنتاج، يجب أن يتم التحقق من الـ ID Token على الخادم.
+            const token = response.credential;
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            const decodedToken = JSON.parse(jsonPayload);
+
+            const mockUser = {
+                id: decodedToken.sub,
+                name: decodedToken.name || decodedToken.email,
+                email: decodedToken.email,
+                picture: decodedToken.picture
+            };
+
+            localStorage.setItem('currentUser', JSON.stringify(mockUser));
+            window.location.href = 'desine.html';
+        }
+
+        function loginWithDiscord() {
+            // قم بتغيير هذه القيمة إلى معرف التطبيق الخاص بك من Discord Developer Portal
+            const clientId = '123456789012345678'; // استبدل هذا الرقم بمعرف التطبيق الخاص بك
+            
+            // تأكد من أن عنوان URL هذا يتطابق مع ما أضفته في إعدادات Discord OAuth2
+            const redirectUri = encodeURIComponent('http://localhost/discord-callback.html');
+            const scope = 'identify email';
+            
+            try {
+                const discordAuthUrl = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
+                window.location.href = discordAuthUrl;
+            } catch (error) {
+                console.error('خطأ في تسجيل الدخول:', error);
+                alert('حدث خطأ أثناء محاولة تسجيل الدخول. يرجى المحاولة مرة أخرى.');
+            }
+        }
+    </script>
+</body>
+</html> 

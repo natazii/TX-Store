@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جاري تسجيل الدخول - TX Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap');
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-lg text-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto"></div>
+            <h2 class="text-xl font-semibold">جاري تسجيل الدخول...</h2>
+        </div>
+    </div>
+
+    <script>
+        // الحصول على رمز المصادقة من URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+
+        if (code) {
+            // هنا يجب عليك إرسال الرمز إلى خادمك للحصول على token
+            // في هذا المثال، سنقوم بمحاكاة عملية تسجيل الدخول
+            const mockUser = {
+                id: '123456789',
+                username: 'Discord User',
+                avatar: 'https://cdn.discordapp.com/embed/avatars/0.png',
+                email: 'user@discord.com'
+            };
+
+            // تخزين بيانات المستخدم
+            localStorage.setItem('currentUser', JSON.stringify(mockUser));
+
+            // إعادة التوجيه إلى الصفحة الرئيسية
+            window.location.href = 'desine.html';
+        } else {
+            // في حالة حدوث خطأ
+            alert('حدث خطأ أثناء تسجيل الدخول');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html> 
